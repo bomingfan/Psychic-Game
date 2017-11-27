@@ -18,6 +18,7 @@ var win = 0;
 var loss = 0;
 var guessLeft = 9;
 var guessHistory = [];
+
 var reset = function () {
     guessLeft = 9;
     guessHistory = [];
@@ -26,6 +27,15 @@ var reset = function () {
 
 
 document.onkeyup = function (event) {
+
+    var html =
+    "<h1>Let's Play the Psychic Game</h1>" +
+    "<p>Wins: " + win + "</p>" +
+    "<p>Losses: " + loss + "</p>" +
+    "<p>Guess Left: " + guessLeft + "</p>" +
+    "<p>You Guesses so far: " + guessHistory + "</p>";    
+
+
     guessLeft--;
 
     var userGuess = event.key;
@@ -49,12 +59,7 @@ document.onkeyup = function (event) {
         
          
 
-    var html = 
-        "<p>Wins: " + win + "</p>" +
-        "<p>Losses: " + loss + "</p>" +
-        "<p>Guess Left: " + guessLeft + "</p>" +
-        "<p>You Guesses so far: " + guessHistory + "</p>";
-        
+     
 
     document.querySelector("#game").innerHTML = html;
 
