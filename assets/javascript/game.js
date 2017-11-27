@@ -17,31 +17,44 @@ console.log(computerChoices)
 var win = 0;
 var loss = 0;
 var guessLeft = 9;
-var yourGuessHistory = [];
+var guessHistory = [];
+var reset = function () {
+    guessLeft = 9;
+    guessHistory = [];
+}
+
 
 
 document.onkeyup = function (event) {
+    guessLeft--;
 
     var userGuess = event.key;
 
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 
-    yourGuessHistory.push(userGuess)
+    guessHistory.push(userGuess)
 
-    // in 10 attempts, if user guess matches the computerguess, user win and reset, otherwise, keep going until guessing right or running out of guesses and user loses
-    for (; i < 10; i++) {
-        if (userGuess === computerGuess) {
-            win++;
-            
-        } else {
-            lose++;
+    // in 9 attempts, if user guess matches the computerguess, user win and reset, otherwise, keep going until guessing right or running out of guesses and user loses
+   
+        if (guessLeft > 0) {
+            if (userGuess === computerGuess) {
+                win++;
+                reset();
+            }
+        } 
+        else if (guessLeft == 0) {
+                loss++;
+                reset();
         }
-    }
-
-    
+        
+         
 
     var html = 
-        "<p>You Guesses so far: " + yourGuessHistory + "</p>";
+        "<p>Wins: " + win + "</p>" +
+        "<p>Losses: " + loss + "</p>" +
+        "<p>Guess Left: " + guessLeft + "</p>" +
+        "<p>You Guesses so far: " + guessHistory + "</p>";
+        
 
     document.querySelector("#game").innerHTML = html;
 
